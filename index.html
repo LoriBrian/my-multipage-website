@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arsenal EPL Fan Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    header {
+      background-color: #da291c;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    nav {
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #da291c;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2rem;
+    }
+
+    footer {
+      background-color: #da291c;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Form styling */
+    form {
+      max-width: 400px;
+      margin: auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #da291c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #a60000;
+    }
+
+    /* Animation */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Arsenal - EPL Fan Page</h1>
+    <p>Latest news and updates about Arsenal Football Club</p>
+  </header>
+
+  <nav>
+    <a href="#home" onclick="showPage('home')">Home</a>
+    <a href="#about" onclick="showPage('about')">About</a>
+    <a href="#contact" onclick="showPage('contact')">Contact</a>
+  </nav>
+
+  <main>
+    <section id="home" class="page">
+      <h2>Welcome Gunners!</h2>
+      <p>Arsenal FC is a top-tier English Premier League team based in North London. Founded in 1886, Arsenal is known for its rich history, talented players, and passionate fan base. Come on you Gunners!</p>
+      <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg" alt="Arsenal Logo" width="100">
+    </section>
+
+    <section id="about" class="page" style="display:none">
+      <h2>About Arsenal</h2>
+      <p>Arsenal has won 13 league titles, 14 FA Cups, and continues to compete at the top level under manager Mikel Arteta. The Emirates Stadium is their fortress and home to thousands of Gooners worldwide.</p>
+    </section>
+
+    <section id="contact" class="page" style="display:none">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+
+        <label for="message">Message:</label>
+        <textarea id="message" rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Arsenal Fan Club. All rights reserved.
+  </footer>
+
+  <script>
+    // Navigation between pages
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.style.display = 'none');
+      document.getElementById(pageId).style.display = 'block';
+    }
+
+    // Contact form validation
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // Store data in localStorage
+      localStorage.setItem('contactName', name);
+      localStorage.setItem('contactEmail', email);
+      localStorage.setItem('contactMessage', message);
+
+      alert("Thanks for contacting us, " + name + "! We'll get back to you soon.");
+      this.reset();
+    });
+
+    // On load, set default page
+    document.addEventListener('DOMContentLoaded', () => {
+      showPage('home');
+    });
+  </script>
+
+</body>
+</html>
